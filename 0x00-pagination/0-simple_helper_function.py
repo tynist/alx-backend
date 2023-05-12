@@ -15,7 +15,6 @@ def index_range(page, page_size):
     Returns:
         tuple: A tuple containing the start and end indexes.
     """
-    
     # Calculate the start index based on the page number and page size
     start_idx = (page - 1) * page_size
 
