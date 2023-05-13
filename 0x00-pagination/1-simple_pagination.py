@@ -3,6 +3,7 @@
 Simple pagination
 """
 import csv
+import math
 from typing import List
 from typing import Tuple
 
@@ -27,10 +28,10 @@ class Server:
         return self.__dataset
 
     def index_range(page, page_size):
-        # Page must be an integer greater than 0
-        assert isinstance(page, int) and page > 0,
-        # Page size must be an integer greater than 0
-        assert isinstance(page_size, int) and page_size > 0,
+        assert type(page) == int
+        assert type(page_size) == int
+        assert page > 0
+        assert page_size > 0
 
         dataset = self.dataset()
         csv_size = len(dataset())
