@@ -29,9 +29,9 @@ class Server:
         """ Finds the correct indexes to paginate dataset.
         """
         # Page must be an integer greater than 0
-        assert isinstance(page, int) and page > 0,
+        assert isinstance(page, int) and page > 0
         # Page size must be an integer greater than 0
-        assert isinstance(page_size, int) and page_size > 0,
+        assert isinstance(page_size, int) and page_size > 0
 
         csv_size = len(self.dataset())
         start, end = index_range(page, page_size)
