@@ -3,7 +3,6 @@
 Simple pagination
 """
 import csv
-import math
 from typing import List
 from typing import Tuple
 
@@ -39,7 +38,7 @@ class Server:
         if start_idx >= csv_size:
             # Return an empty list if start index is out of range
             return []
-        return self.dataset[start_idx:end_idx]
+        return self.dataset()[start_idx:end_idx]
 
     def index_range(page: int, page_size: int) -> Tuple[int, int]:
         """
