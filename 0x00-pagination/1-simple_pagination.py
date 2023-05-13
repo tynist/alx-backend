@@ -38,7 +38,7 @@ class Server:
         Returns:
             list: A list of rows from the dataset.
         """
-        # Page and Page_size must be an interger that is greater than 0 
+        # Page and Page_size must be an interger that is greater than 0
         assert type(page) == int
         assert type(page_size) == int
         assert page > 0
