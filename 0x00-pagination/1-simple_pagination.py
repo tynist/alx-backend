@@ -38,8 +38,8 @@ class Server:
         end_index = min(end_index, csv_size)
         if start_index >= len(dataset):
             # Return an empty list if start index is out of range
-			return []
-		return dataset[start_index:end_index]
+		return []
+	return dataset[start_index:end_index]
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
