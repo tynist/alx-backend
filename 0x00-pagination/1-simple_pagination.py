@@ -27,19 +27,22 @@ class Server:
 
         return self.__dataset
 
-    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+    def index_range(page, page_size):
         # Page must be an integer greater than 0
         assert isinstance(page, int) and page > 0,
         # Page size must be an integer greater than 0
         assert isinstance(page_size, int) and page_size > 0,
 
-        start_index, end_index = index_range(page, page_size)
         dataset = self.dataset()
+        csv_size = len(dataset())
+        start_idx, end_idx = index_range(page, page_size)
+        end_idx = min(end_idx, csv_size)
         if start_index >= len(dataset):
-            return []  # Return an empty list if start index is out of range
-        return dataset[start_index:end_index]
+            # Return an empty list if start index is out of range
+            return []
+        return dataset[start_idx:end_idx]
 
-    def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    def index_range(page, page_size)::
         """
         Returns a tuple of start & end indexes based on pagination parameters.
         """
