@@ -6,11 +6,11 @@ Simple helper function
 
 def index_range(page, page_size):
     """
-    Returns a tuple of start and end indexes based on pagination parameters.
+    Calculates the start and end indexes for pagination.
 
     Args:
-        page (int): The page number (1-indexed)
-        page_size (int): The size of each page
+        page (int): The page number.
+        page_size (int): The number of rows per page
 
     Returns:
         tuple: A tuple containing the start and end indexes.
