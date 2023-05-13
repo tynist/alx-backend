@@ -38,7 +38,7 @@ class Server:
         end_idx = min(end_idx, data_size)
         if start_idx >= data_size:
             return []
-        return self.dataset()[start:end]
+        return self.dataset()[start_idx:end_idx]
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
