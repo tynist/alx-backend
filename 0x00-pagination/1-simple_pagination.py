@@ -33,13 +33,12 @@ class Server:
         assert page > 0
         assert page_size > 0
 
-        start_index, end_index = index_range(page, page_size)
-        dataset = self.dataset()
-        end_index = min(end_index, csv_size)
-        if start_index >= len(dataset):
-            # Return an empty list if start index is out of range
-		return []
-	return dataset[start_index:end_index]
+        csv_size = len(self.dataset())
+        start, end = index_range(page, page_size)
+        end = min(end, csv_size)
+        if start >= csv_size:
+            return []
+        return self.dataset()[start:end]
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
