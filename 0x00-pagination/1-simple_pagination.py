@@ -55,6 +55,17 @@ class Server:
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """ Returns a tuple containing a start and end index.
     """
-    return ((page - 1) * page_size, page * page_size)
+    Calculates the start and end indexes for pagination.
+
+    Args:
+        page (int): The page number.
+        page_size (int): The number of rows per page
+
+    Returns:
+        tuple: A tuple containing the start and end indexes.
+    """
+    start_idx = (page - 1) * page_size
+    end_idx = page * page_size
+
+    return start_idx, end_idx
