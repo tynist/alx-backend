@@ -33,10 +33,10 @@ class Server:
         assert page > 0
         assert page_size > 0
 
-        csv_size = len(self.dataset())
+        data_set = len(self.dataset())
         start, end = index_range(page, page_size)
-        end = min(end, csv_size)
-        if start >= csv_size:
+        end = min(end, data_set)
+        if start >= data_set:
             return []
         return self.dataset()[start:end]
 
