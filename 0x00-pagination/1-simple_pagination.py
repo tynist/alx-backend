@@ -51,6 +51,7 @@ class Server:
         # Return empty list if start index is out of range
         if start_idx >= data_size:
             return []
+
         return self.dataset()[start_idx:end_idx]
 
 
