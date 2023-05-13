@@ -29,8 +29,7 @@ class Server:
         # Page size must be an integer greater than 0
         assert isinstance(page_size, int) and page_size > 0,
 
-        start_index, end_index = index_range(page, page_size)
-        dataset = self.dataset()
-        if start_index >= len(dataset):
-            return []  # Return an empty list if start index is out of range
-        return dataset[start_index:end_index]
+    def index_range(page, page_size):
+        start_idx = (page - 1) * page_size
+        end_idx = start_idx + page_size
+        return start_idx, end_idx
