@@ -52,22 +52,21 @@ class Server:
         return dataset[start_index:end_index]
 
 
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """
-    Returns a tuple of start & end indexes based on pagination parameters.
+    def index_range(page: int, page_size: int) -> Tuple[int, int]:
+        """
+        Returns a tuple of start & end indexes based on pagination parameters.
 
-    Args:
-        page (int): The page number (1-indexed)
-        page_size (int): The size of each page
+        Args:
+            page (int): The page number (1-indexed)
+            page_size (int): The size of each page
 
-    Returns:
-        tuple: A tuple containing the start and end indexes.
-    """
+        Returns:
+            tuple: A tuple containing the start and end indexes.
+        """
+        # Calculate the start index based on the page number and page size
+        start_index = (page - 1) * page_size
 
-    # Calculate the start index based on the page number and page size
-    start_index = (page - 1) * page_size
+        # Calculate the end index by adding the start index to the page size
+        end_index = start_index + page_size
 
-    # Calculate the end index by adding the start index to the page size
-    end_index = start_index + page_size
-
-    return start_index, end_index
+        return start_index, end_index
