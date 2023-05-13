@@ -3,7 +3,8 @@
 """
 
 import csv
-from typing import List, Tuple
+from typing import List
+from typing import Tuple
 
 
 class Server:
@@ -41,6 +42,20 @@ class Server:
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """ Returns a tuple containing a start and end index.
-    """
-    return ((page - 1) * page_size, page * page_size)
+        """
+        Returns a tuple of start & end indexes based on pagination parameters.
+
+        Args:
+            page (int): The page number (1-indexed)
+            page_size (int): The size of each page
+
+        Returns:
+            tuple: A tuple containing the start and end indexes.
+        """
+        # Calculate the start index based on the page number and page size
+        start_index = (page - 1) * page_size
+
+        # Calculate the end index by adding the start index to the page size
+        end_index = start_index + page_size
+
+        return start_index, end_index
