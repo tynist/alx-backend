@@ -40,8 +40,8 @@ class Server:
             return []
         return self.dataset()[start:end]
 
-
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-        """ Returns a tuple containing a start and end index.
-    """
-    return ((page - 1) * page_size, page * page_size)
+    def index_range(page: int, page_size: int) -> Tuple[int, int]:
+        """
+        Returns a tuple containing a start and end index.
+        """
+        return ((page - 1) * page_size, page * page_size)
