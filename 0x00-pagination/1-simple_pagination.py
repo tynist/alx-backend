@@ -42,7 +42,7 @@ class Server:
             return []
         return dataset[start_idx:end_idx]
 
-    def index_range(page, page_size)::
+    def index_range(page, page_size):
         """
         Returns a tuple of start & end indexes based on pagination parameters.
         """
