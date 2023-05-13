@@ -31,6 +31,7 @@ class Server:
         assert type(page) == int
         assert type(page_size) == int
         assert page > 0
+        assert page_size > 0
 
         dataset = self.dataset()
         csv_size = len(dataset())
