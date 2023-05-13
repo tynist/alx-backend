@@ -34,7 +34,8 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-        Returns a list of rows from the dataset, starting at the specified page and page size.
+        Returns a list of rows from the dataset,
+        starting at the specified page and page size.
 
         Args:
             page (int, optional): The page number (1-indexed). Defaults to 1.
@@ -47,8 +48,10 @@ class Server:
             list: A list of rows from the dataset.
         """
 
-        assert isinstance(page, int) and page > 0, "Page must be an integer greater than 0"
-        assert isinstance(page_size, int) and page_size > 0, "Page size must be an integer greater than 0"
+        # Page must be an integer greater than 0
+        assert isinstance(page, int) and page > 0,
+        # Page size must be an integer greater than 0
+        assert isinstance(page_size, int) and page_size > 0,
 
         start_index, end_index = index_range(page, page_size)
         dataset = self.dataset()
@@ -59,7 +62,7 @@ class Server:
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
-    Returns a tuple of start and end indexes based on pagination parameters.
+    Returns a tuple of start & end indexes based on pagination parameters.
 
     Args:
         page (int): The page number (1-indexed)
