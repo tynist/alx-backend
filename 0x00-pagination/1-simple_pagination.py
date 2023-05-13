@@ -3,7 +3,6 @@
 Simple pagination
 """
 import csv
-import math
 from typing import List
 from typing import Tuple
 
@@ -37,7 +36,7 @@ class Server:
         csv_size = len(dataset())
         start_idx, end_idx = index_range(page, page_size)
         end_idx = min(end_idx, csv_size)
-        if start_index >= len(dataset):
+        if start_idx >= len(dataset):
             # Return an empty list if start index is out of range
             return []
         return dataset[start_idx:end_idx]
