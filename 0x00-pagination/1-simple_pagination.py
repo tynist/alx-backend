@@ -8,15 +8,7 @@ from typing import List
 from typing import Tuple
 
 
-"""
-Server class to paginate a database of popular baby names.
-"""
 class Server:
-    """
-    Cached dataset
-    """
-    DATA_FILE = "Popular_Baby_Names.csv"
-
     def __init__(self):
         self.__dataset = None
 
