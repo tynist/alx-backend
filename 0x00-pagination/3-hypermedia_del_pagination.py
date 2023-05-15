@@ -52,11 +52,9 @@ class Server:
             idx += 1
             size += 1
         
-        _dict = {
+        return {
             "index": index,
             "data": data,
             "page_size": page_size,
             "next_index": idx
         }
-
-        return _dict
