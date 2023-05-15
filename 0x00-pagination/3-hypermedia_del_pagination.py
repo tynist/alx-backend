@@ -40,15 +40,35 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        '''deletion-resilient paginate & returns a dictionary'''
+        """
+        Get hyper-index from indexed dataset.
+
+        Args:
+            index: Starting index for the page. Default: None
+            page_size: Number of items per page Default: 10
+
+        Returns:
+            dict: A dictionary containing the following key-value pairs:
+              data: dataset page
+              index: index of the first row of data returned
+              next_index: index of the first row of data not returned
+              page_size: length of the returned dataset page
+        """
+        # Check input types
         assert type(index) == int and type(page_size) == int
+
+        # Check if the index is within valid range of the indexed dataset
         assert 0 <= index < len(self.indexed_dataset())
+        
         data = []
         next_index = index + page_size
+
+        # Iterate over the range from index to next_index
         for i in range(index, next_index):
             if self.indexed_dataset().get(i):
                 data.append(self.indexed_dataset()[i])
             else:
+                # Skip missing item and adjust the next_index
                 i += 1
                 next_index += 1
         return {
