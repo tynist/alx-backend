@@ -72,6 +72,7 @@ class Server:
                 # Skip missing item and adjust the idx accordingly
                 i += 1
                 idx += 1
+
         return {
             "data": data,
             "index": index,
