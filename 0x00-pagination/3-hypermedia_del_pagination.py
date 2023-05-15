@@ -59,7 +59,7 @@ class Server:
 
         # Check if the index is within valid range of the indexed dataset
         assert 0 <= index < len(self.indexed_dataset())
-        
+
         data = []
         next_index = index + page_size
 
