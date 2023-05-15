@@ -52,7 +52,7 @@ class Server:
             data.append(dataset[idx])
             idx += 1
             size += 1
-        
+
         return {
             "index": index,
             "next_index": idx
