@@ -62,19 +62,19 @@ class Server:
         assert 0 <= index < len(dataset)
 
         data = []
-        next_index = index + page_size
+        idx = index + page_size
 
-        # Iterate over the range from index to next_index
-        for i in range(index, next_index):
+        # Iterate over the range from index to idx
+        for i in range(index, idx):
             if dataset.get(i):
                 data.append(dataset[i])
             else:
-                # Skip missing item and adjust the next_index
+                # Skip missing item and adjust the idx accordingly
                 i += 1
-                next_index += 1
+                idx += 1
         return {
             "data": data,
             "index": index,
-            "next_index": next_index,
+            "next_index": idx,
             "page_size": page_size
         }
