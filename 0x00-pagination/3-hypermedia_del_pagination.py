@@ -58,15 +58,16 @@ class Server:
         assert type(index) == int and type(page_size) == int
 
         # Check if the index is within valid range of the indexed dataset
-        assert 0 <= index < len(self.indexed_dataset())
+        dataset = self.indexed_dataset()
+        assert 0 <= index < len(dataset)
 
         data = []
         next_index = index + page_size
 
         # Iterate over the range from index to next_index
         for i in range(index, next_index):
-            if self.indexed_dataset().get(i):
-                data.append(self.indexed_dataset()[i])
+            if dataset.get(i):
+                data.append(dataset[i])
             else:
                 # Skip missing item and adjust the next_index
                 i += 1
