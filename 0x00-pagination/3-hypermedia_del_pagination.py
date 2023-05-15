@@ -41,7 +41,6 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         dataset = self.indexed_dataset()
-        assert type(index) == int and type(page_size) == int
         assert 0 <= index < len(dataset)
         data = []
         idx = index
