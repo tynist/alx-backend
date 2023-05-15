@@ -44,14 +44,13 @@ class Server:
         assert type(index) == int and type(page_size) == int
         assert 0 <= index < len(dataset)
         data = []
-        idx = index
-        size = 0
-        while (size < page_size and idx < len(dataset)):
-            if not dataset.get(idx):
+        idx = index + page_size
+        for i in range(index, idx):
+            if dataset.get(i):
+                data.append(dataset[i])
+            else:
                 idx += 1
-            data.append(dataset[idx])
-            idx += 1
-            size += 1
+                i += 1
 
         return {
             "index": index,
