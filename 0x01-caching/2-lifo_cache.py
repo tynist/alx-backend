@@ -13,10 +13,7 @@ class LIFOCache(BaseCaching):
         super().__init__()
 
     def put(self, key, item):
-        """Assigns the item value to the key in the cache.
-        If the number of items exceeds the maximum limit, the last item
-        added to the cache will be discarded (LIFO algorithm).
-
+        """Assigns d item value to d key in the cache using d LIFO algorithm.
         Args:
             key: The key to assign the item value to.
             item: The value to be assigned to the key.
