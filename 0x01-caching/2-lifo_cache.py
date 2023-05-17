@@ -13,7 +13,7 @@ class LIFOCache(BaseCaching):
         super().__init__()
 
     def put(self, key, item):
-        """Assigns d item value to d key in the cache using d LIFO algorithm.
+        """Assigns d item value to d key in the cache using d LIFO algo
         Args:
             key: The key to assign the item value to.
             item: The value to be assigned to the key.
@@ -22,10 +22,10 @@ class LIFOCache(BaseCaching):
             self.cache_data[key] = item
 
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                # Remove the first item (FIFO)
-                last_item = next(reversed(self.cache_data))
-                del self.cache_data[last_item]
-                print(f"DISCARD: {last_item}")
+                # Remove the last inserted key (LIFO)
+                self.discard = self.last_inserted_key()
+                self.cache_data.pop(self.discard)
+                print('DISCARD:', self.discard)
 
     def get(self, key):
         """Returns the value associated with the key in the cache.
@@ -39,4 +39,15 @@ class LIFOCache(BaseCaching):
         """
         if key is not None and key in self.cache_data:
             return self.cache_data[key]
+        return None
+
+    def last_inserted_key(self):
+        """Returns the last inserted key in the cache.
+
+        Returns:
+            The last inserted key,
+            or None if the cache is empty.
+        """
+        if self.cache_data:
+            return list(self.cache_data.keys())[-1]
         return None
