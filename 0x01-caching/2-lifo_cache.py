@@ -18,14 +18,15 @@ class LIFOCache(BaseCaching):
             key: The key to assign the item value to.
             item: The value to be assigned to the key.
         """
-        if key is not None and item is not None:
+         if key and item:
             self.cache_data[key] = item
-
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                # Remove the last inserted key (LIFO)
-                self.discard = self.last_inserted_key()
-                self.cache_data.pop(self.discard)
-                print('DISCARD:', self.discard)
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            self.cache_data.pop(self.discard)
+            print('DISCARD:', self.discard)
+        if key is not None:
+            self.discard = key
+        else:
+            pass
 
     def get(self, key):
         """Returns the value associated with the key in the cache.
@@ -39,15 +40,4 @@ class LIFOCache(BaseCaching):
         """
         if key is not None and key in self.cache_data:
             return self.cache_data[key]
-        return None
-
-    def last_inserted_key(self):
-        """Returns the last inserted key in the cache.
-
-        Returns:
-            The last inserted key,
-            or None if the cache is empty.
-        """
-        if self.cache_data:
-            return list(self.cache_data.keys())[-1]
         return None
