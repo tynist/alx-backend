@@ -17,7 +17,7 @@ class LRUCache(BaseCaching):
         """Gives the item value to the key in the cache using the LRU algo
         If the number of items exceeds the maximum limit,
         the least recently used item (least_used_key) will be discarded.
-        
+
         Args:
             key: The key to assign the item value to.
             item: The value to be assigned to the key.
