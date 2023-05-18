@@ -1,7 +1,6 @@
 """
 LIFO Caching
 """
-
 from base_caching import BaseCaching
 
 
@@ -19,14 +18,16 @@ class LIFOCache(BaseCaching):
             item: The value to be assigned to the key.
         """
          if key and item:
+            if len(self.cache_data) >= self.MAX_ITEMS:
+                if key in self.cache_data:
+                    del self.cache_data[key]
+                    self.key_indexes.remove(key)
+                else:
+                    del self.cache_data[self.key_indexes[self.MAX_ITEMS - 1]]
+                    item_discarded = self.key_indexes.pop(self.MAX_ITEMS - 1)
+                    print("DISCARD:", item_discarded)
             self.cache_data[key] = item
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            self.cache_data.pop(self.discard)
-            print('DISCARD:', self.discard)
-        if key is not None:
-            self.discard = key
-        else:
-            pass
+            self.key_indexes.append(key)
 
     def get(self, key):
         """Returns the value associated with the key in the cache.
