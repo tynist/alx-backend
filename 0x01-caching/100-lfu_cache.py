@@ -35,11 +35,13 @@ class LFUCache(BaseCaching):
         self.least_freq = min(self.least_freq, self.freqs[key])
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            itms_to_discard = [p for p, q in self.freqs.items() if q == self.least_freq]
+            itms_to_discard =
+            [p for p, q in self.freqs.items() if q == self.least_freq]
 
             if len(itms_to_discard) > 1:
                 # Use LRU algorithm to discard the LRU item(s)
-                least_ru_item = min(itms_to_discard, key=lambda p: self.timestamps[p])
+                least_ru_item =
+                min(itms_to_discard, key=lambda p: self.timestamps[p])
                 itms_to_discard.remove(least_ru_item)
 
             for item in itms_to_discard:
