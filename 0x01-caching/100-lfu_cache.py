@@ -6,35 +6,59 @@ from base_caching import BaseCaching
 
 
 class LFUCache(BaseCaching):
-    """ caching system:
+    """
+    LFUCache class that represents a caching system using LFU  algorithm
+
     Args:
-        LFUCache ([class]): [basic caching]
+        BaseCaching: The base caching class to inherit from.
     """
 
-    def __init__(self) -> None:
-        """ initialize of class """
-        self.temp_list = {}
+    def __init__(self):
+        """
+        Initialize the LFUCache.
+        """
         super().__init__()
+        self.item_freqs = {}  # Tracks the frequency of cache items
 
     def put(self, key, item):
-        """ Add an item in the cache
         """
-        if not (key is None or item is None):
-            self.cache_data[key] = item
-            if len(self.cache_data.keys()) > self.MAX_ITEMS:
-                pop = min(self.temp_list, key=self.temp_list.get)
-                self.temp_list.pop(pop)
-                self.cache_data.pop(pop)
-                print(f"DISCARD: {pop}")
-            if not (key in self.temp_list):
-                self.temp_list[key] = 0
-            else:
-                self.temp_list[key] += 1
+        Gives the item value to the key in the cache using LFU algo.
+
+        Args:
+            key (hashable): The key to assign the item value to.
+            item: The value to be assigned to the key.
+        """
+        if key is None or item is None:
+            return
+
+        # Assign the item value to the key in cache_data
+		self.cache_data[key] = item
+
+        if len(self.cache_data) > self.MAX_ITEMS:
+            # Find the key with the minimum frequency
+			item_to_discard = min(self.item_freqs, key=self.item_freqs.get)
+            self.item_freqs.pop(item_to_discard)
+            self.cache_data.pop(item_to_discard)
+            print(f"DISCARD: {item_to_discard}")
+
+        if key not in self.item_freqs:
+			# Initialize the frequency for a new item
+			self.item_freqs[key] = 0
+        else:
+            # Increment the frequency of an existing item
+			self.item_freqs[key] += 1
 
     def get(self, key):
-        """ Get an item by key
+        """Returns the value associated with the key in the cache.
+        Args:
+            key (hashable): The key of the item to retrieve.
+        Returns:
+            The value associated with the key, 
+            or None if the key is None or doesn't exist in the cache.
         """
-        if (key is None) or not (key in self.cache_data):
+        if key is None or key not in self.cache_data:
             return None
-        self.temp_list[key] += 1
+
+        self.item_freqs[key] += 1  #Increment d frequency of accessed item
+
         return self.cache_data.get(key)
