@@ -43,7 +43,8 @@ class MRUCache(BaseCaching):
             key: The key to retrieve the value for.
 
         Returns:
-            The value associated with the key, or None if the key is None or doesn't exist in the cache.
+            The value associated with the key,
+            or None if the key is None or doesn't exist in the cache.
         """
         if key is not None and key in self.cache_data:
             # Promote the key to the most recently used position
