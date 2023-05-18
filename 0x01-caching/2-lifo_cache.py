@@ -14,7 +14,8 @@ class LIFOCache(BaseCaching):
         self.key_indexes = []
 
     def put(self, key, item):
-        """Assigns the item value to the key in the cache using the LIFO algo.
+        """
+        Assigns the item value to the key in the cache using the LIFO algo
         Args:
             key: The key to assign the item value to.
             item: The value to be assigned to the key.
@@ -26,6 +27,7 @@ class LIFOCache(BaseCaching):
                     self.key_indexes.remove(key)
                 else:
                     last_item = self.key_indexes.pop()
+                    # Remove the last item - LIFO
                     del self.cache_data[last_item]
                     print("DISCARD:", last_item)
 
