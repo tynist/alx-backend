@@ -28,23 +28,22 @@ class LFUCache(BaseCaching):
         # Assign the item value to the key in cache_data
         self.cache_data[key] = item
 
-        # Update the frequency of the key
+        # Update the frequency of the key and the least frequency
         self.freqs[key] += 1
-
-        # Update the least frequency
         self.least_freq = min(self.least_freq, self.freqs[key])
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            itms_to_discard =
-            [p for p, q in self.freqs.items() if q == self.least_freq]
+            items_to_discard = [p for p, q in self.freqs.items()
+                                if q == self.least_freq]
 
-            if len(itms_to_discard) > 1:
+            if len(items_to_discard) > 1:
                 # Use LRU algorithm to discard the LRU item(s)
-                least_ru_item =
-                min(itms_to_discard, key=lambda p: self.timestamps[p])
-                itms_to_discard.remove(least_ru_item)
+                least_ru_item = min(
+                    items_to_discard, key=lambda p: self.timestamps[p]
+                )
+                items_to_discard.remove(least_ru_item)
 
-            for item in itms_to_discard:
+            for item in items_to_discard:
                 del self.cache_data[item]
                 del self.freqs[item]
                 print(f"DISCARD: {item}")
@@ -57,14 +56,11 @@ class LFUCache(BaseCaching):
 
     def get(self, key):
         """Returns the value associated with the key in the cache.
-
         Args:
             key: The key to retrieve the value for.
-
         Returns:
             The value associated with the key,
             or None if the key is None or doesn't exist in the cache.
-
         """
         if key is not None and key in self.cache_data:
             # Update the frequency and timestamp of the key
