@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""
+LIFO Caching
+"""
 from base_caching import BaseCaching
 
 
