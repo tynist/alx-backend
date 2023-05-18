@@ -39,7 +39,8 @@ class LFUCache(BaseCaching):
         if key not in self.item_freqs:
             self.item_freqs[key] = 0  # Initialize the frequency for a new item
         else:
-            self.item_freqs[key] += 1  # Increment the frequency of an existing item
+            # Increment the frequency of an existing item
+            self.item_freqs[key] += 1
 
     def get(self, key):
         """Returns the value associated with the key in the cache.
@@ -52,6 +53,7 @@ class LFUCache(BaseCaching):
         if key is None or key not in self.cache_data:
             return None
 
-        self.item_freqs[key] += 1  # Increment the frequency of the accessed item
+        # Increment the frequency of the accessed item
+        self.item_freqs[key] += 1
 
         return self.cache_data.get(key)
