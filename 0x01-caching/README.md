@@ -1,7 +1,7 @@
 0x01. Caching
 =============
 
-Algorithm, Python
+Back-end
 
 -   By Guillaume, CTO at Holberton School
 
@@ -10,6 +10,7 @@ Background Context
 ------------------
 
 In this project, you learn different caching algorithms.
+
 
 Resources
 ---------
