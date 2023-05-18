@@ -18,7 +18,7 @@ class MRUCache(BaseCaching):
     def put(self, key, item):
         """
         Assigns the item value to the key in the cache using the MRU algo.
-        If the number of items exceeds the maximum limit, 
+        If the number of items exceeds the maximum limit,
         the most recently used (most_used_key) item will be discarded.
 
         Args:
