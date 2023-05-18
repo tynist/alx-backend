@@ -9,17 +9,15 @@ from base_caching import BaseCaching
 class MRUCache(BaseCaching):
     """Class that represents a caching system using the MRU algo"""
 
-
     def __init__(self):
         """Initialize the MRUCache."""
         super().__init__()
         self.mru_order = OrderedDict()
 
     def put(self, key, item):
-        """Assigns the item value to the key in the cache using the MRU algorithm.
-
-        If the number of items exceeds the maximum limit, the most recently used item
-        will be discarded.
+        """Assigns the item value to the key in the cache using the MRU algo.
+        If the number of items exceeds the maximum limit,
+        the most recently used item will be discarded.
 
         Args:
             key: The key to assign the item value to.
