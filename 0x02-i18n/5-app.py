@@ -59,7 +59,7 @@ def get_locale():
 
 
 @app.route("/")
-def hello():
+def index():
     """
     Display a welcome message if a user is logged in,
     otherwise display a default message.
