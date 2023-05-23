@@ -108,14 +108,13 @@ def get_timezone():
     return app.config["BABEL_DEFAULT_TIMEZONE"]
 
 
-@app.route("/", methods=["GET"], strict_slashes=False)
+@app.route("/")
 def index():
     """
     Render the index template with the appropriate messages.
     """
-    current_time = datetime.now(pytz.timezone(get_timezone())).strftime("%b %d, %Y, %I:%M:%S %p")
-    return render_template("index.html", current_time=current_time)
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port="5000")
