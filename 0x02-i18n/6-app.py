@@ -71,8 +71,8 @@ def get_locale():
     return app.config["BABEL_DEFAULT_LOCALE"]
 
 
-@app.route("/", methods=["GET"], strict_slashes=False)
-def hello():
+@app.route("/")
+def index():
     """
     Render the index template with the appropriate messages.
     """
