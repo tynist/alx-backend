@@ -31,8 +31,7 @@ def index():
     """
     Render the index template with parametrized messages.
     """
-    message = "Hello, world!"
-    return render_template('3-index.html', message=message)
+    return render_template('2-index.html')
 
 
 if __name__ == '__main__':
