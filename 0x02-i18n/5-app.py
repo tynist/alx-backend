@@ -29,14 +29,11 @@ users = {
 }
 
 
-def get_user(login_as):
+def get_user(user_id):
     """
     Retrieve a user based on the login_as parameter.
     """
-    try:
-        return users.get(int(login_as))
-    except (ValueError, TypeError):
-        return
+    return users.get(user_id)
 
 
 @app.before_request
@@ -44,28 +41,34 @@ def before_request():
     """
     Execute before each request to set the global user.
     """
-    g.user = get_user(request.args.get("login_as"))
+    login_as = request.args.get("login_as")
+    if login_as:
+        user_id = int(login_as)
+        g.user = get_user(user_id)
+    else:
+        g.user = None
 
 
 @babel.localeselector
 def get_locale():
     """
-    Determine the best match for td supported languages based on request
+    Get the locale to use for translations.
     """
-    locale = request.args.get("locale")
-    if locale:
-        return locale
+    if g.user and g.user["locale"] in app.config["LANGUAGES"]:
+        return g.user["locale"]
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 @app.route("/")
 def index():
     """
-    Display a welcome message if a user is logged in,
-    otherwise display a default message.
+    Render the index template with the appropriate messages and user login status.
     """
-    return render_template("5-index.html")
-
+    if g.user:
+        message = gettext("You are logged in as %(username)s.") % {"username": g.user["name"]}
+    else:
+        message = gettext("You are not logged in.")
+    return render_template("5-index.html", message=message)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
