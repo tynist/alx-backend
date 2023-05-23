@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """
 5. Basic Flask app
 """
@@ -13,7 +12,7 @@ babel = Babel(app)
 
 class Config:
     """
-    Config class.
+    Configuration class for the Flask app.
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
@@ -32,18 +31,18 @@ users = {
 
 def get_user(login_as):
     """
-    get_user.
+    Retrieve a user based on the login_as parameter.
     """
     try:
         return users.get(int(login_as))
-    except Exception:
+    except (ValueError, TypeError):
         return
 
 
 @app.before_request
 def before_request():
     """
-    before_request
+    Execute before each request to set the global user.
     """
     g.user = get_user(request.args.get("login_as"))
 
@@ -51,21 +50,22 @@ def before_request():
 @babel.localeselector
 def get_locale():
     """
-    get_locale.
+    Determine the best match for td supported languages based on request
     """
     locale = request.args.get("locale")
-    if locale:
+    if locale and locale in app.config["LANGUAGES"]:
         return locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
-@app.route('/', methods=["GET"], strict_slashes=False)
+@app.route("/", methods=["GET"], strict_slashes=False)
 def hello():
     """
-    hello.
+    Display a welcome message if a user is logged in,
+    otherwise display a default message.
     """
-    return render_template('5-index.html')
+    return render_template("5-index.html")
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host="0.0.0.0", port=5000)
