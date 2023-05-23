@@ -53,12 +53,12 @@ def get_locale():
     Determine the best match for td supported languages based on request
     """
     locale = request.args.get("locale")
-    if locale and locale in app.config["LANGUAGES"]:
+    if locale:
         return locale
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
-@app.route("/", methods=["GET"], strict_slashes=False)
+@app.route("/")
 def hello():
     """
     Display a welcome message if a user is logged in,
