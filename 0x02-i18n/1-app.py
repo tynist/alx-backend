@@ -23,9 +23,6 @@ class Config:
 app.config.from_object(Config)
 
 
-
-
-
 @app.route('/')
 def index():
     return render_template('1-index.html')
