@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Use user locale and timezone
+Infer appropriate time zone
 """
 
 from flask import Flask, render_template, request, g
