@@ -2,6 +2,7 @@
 """
 Use user locale
 """
+
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 
@@ -11,7 +12,7 @@ babel = Babel(app)
 
 class Config:
     """
-    Configuration class for the Flask app
+    Config class for the Flask app.
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
@@ -41,7 +42,7 @@ def get_user(login_as):
 @app.before_request
 def before_request():
     """
-    Execute before each request to set the global user
+    Execute before each request to set the global user.
     """
     g.user = get_user(request.args.get("login_as"))
 
@@ -52,32 +53,27 @@ def get_locale():
     Get the locale to use for translations.
     """
     locale = request.args.get("locale")
-    if locale and locale in app.config["LANGUAGES"]:
+    if locale:
         return locale
-
     user = request.args.get("login_as")
     if user:
-        user_locale = users.get(int(user)).get("locale")
-        if user_locale and user_locale in app.config["LANGUAGES"]:
-            return user_locale
-
-    headers = request.headers.get("Accept-Language")
+        lang = users.get(int(user)).get('locale')
+        if lang in app.config['LANGUAGES']:
+            return lang
+    headers = request.headers.get("locale")
     if headers:
-        langs = [lang.strip() for lang in headers.split(",")]
-        for lang in langs:
-            if lang in app.config["LANGUAGES"]:
-                return lang
-
-    return app.config["BABEL_DEFAULT_LOCALE"]
+        return headers
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route("/")
-def index():
+@app.route('/', methods=["GET"], strict_slashes=False)
+def hello():
     """
-    Render the index template with the appropriate messages.
+    Render the index template with the appropriate message.
     """
-    return render_template("6-index.html")
+    return render_template('6-index.html')
 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
+
