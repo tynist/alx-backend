@@ -22,16 +22,13 @@ app.config.from_object(Config)
 
 @babel.localeselector
 def get_locale():
-    # Get the best match of supported languages based on request.accept_languages
+    # Get the best match of supported languages
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index():
-    # Example usage of gettext for language translation
-    title = gettext('Welcome to Holberton')
-    header = gettext('Hello world')
-    return render_template('1-index.html', title=title, header=header)
+    return render_template('1-index.html')
 
 
 if __name__ == '__main__':
