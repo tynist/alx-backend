@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ get_locale() }}">
 <head>
-    <title>{{ _('Hello world!') }}</title>
+    <meta charset="UTF-8">
+    <title>{{ _('Home Title') }}</title>
 </head>
 <body>
-    {% if message %}
+    <h1>{{ _('Home Header') }}</h1>
     <p>{{ message }}</p>
-    {% endif %}
 </body>
 </html>
+
 
