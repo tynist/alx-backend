@@ -1,9 +1,12 @@
+#!/usr/bin/env python3
 """
 Mock logging in
 """
 
-from flask import Flask, render_template, g
-from flask_babel import Babel, gettext
+
+
+from flask import Flask, render_template, request, g
+from flask_babel import Babel
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -11,7 +14,7 @@ babel = Babel(app)
 
 class Config:
     """
-    Configuration class for the Flask app.
+    Config class for the Flask app.
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
@@ -30,12 +33,12 @@ users = {
 
 def get_user(login_as):
     """
-    Retrieve a user based on the `login_as` parameter.
+    Retrieve a user based on the login_as parameter.
     """
     try:
         return users.get(int(login_as))
     except Exception:
-        return None
+        return
 
 
 @app.before_request
@@ -51,22 +54,22 @@ def get_locale():
     """
     Get the locale to use for translations.
     """
-    if g.user and g.user["locale"] in app.config["LANGUAGES"]:
-        return g.user["locale"]
-    return request.accept_languages.best_match(app.config["LANGUAGES"])
+    locale = request.args.get("locale")
+    if locale:
+        return locale
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route("/")
-def index():
+@app.route('/', methods=["GET"], strict_slashes=False)
+def hello():
     """
-    Render the index template with the appropriate messages.
+    Render the index template with the appropriate message.
     """
     if g.user:
-        message = gettext("You are logged in as %(username)s.")
-        % {"username": g.user["name"]}
+        message = f"You are logged in as {g.user['name']}."
     else:
-        message = gettext("You are not logged in.")
-    return render_template("5-index.html", message=message)
+        message = "You are not logged in."
+    return render_template('5-index.html', message=message)
 
 
 if __name__ == "__main__":
