@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
 """
 Mock logging in
 """
 
-from flask import Flask, render_template, request, g
-from flask_babel import Babel
+from flask import Flask, render_template, g
+from flask_babel import Babel, gettext
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -29,11 +28,14 @@ users = {
 }
 
 
-def get_user(user_id):
+def get_user(login_as):
     """
-    Retrieve a user based on the login_as parameter.
+    Retrieve a user based on the `login_as` parameter.
     """
-    return users.get(user_id)
+    try:
+        return users.get(int(login_as))
+    except Exception:
+        return None
 
 
 @app.before_request
@@ -41,12 +43,7 @@ def before_request():
     """
     Execute before each request to set the global user.
     """
-    login_as = request.args.get("login_as")
-    if login_as:
-        user_id = int(login_as)
-        g.user = get_user(user_id)
-    else:
-        g.user = None
+    g.user = get_user(request.args.get("login_as"))
 
 
 @babel.localeselector
@@ -62,16 +59,15 @@ def get_locale():
 @app.route("/")
 def index():
     """
-    Render d index template with d right messages & user login status
+    Render the index template with the appropriate messages.
     """
     if g.user:
-        message = gettext("You are logged in as %(username)s.") % {
-            "username": g.user["name"]
-        }
+        message = gettext("You are logged in as %(username)s.")
+        % {"username": g.user["name"]}
     else:
         message = gettext("You are not logged in.")
     return render_template("5-index.html", message=message)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port="5000")
