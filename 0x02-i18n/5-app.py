@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-5. Basic Flask app
+Mock logging in
 """
 
 from flask import Flask, render_template, request, g
