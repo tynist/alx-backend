@@ -62,13 +62,16 @@ def get_locale():
 @app.route("/")
 def index():
     """
-    Render the index template with the appropriate messages and user login status.
+    Render d index template with d right messages & user login status
     """
     if g.user:
-        message = gettext("You are logged in as %(username)s.") % {"username": g.user["name"]}
+        message = gettext("You are logged in as %(username)s.") % {
+            "username": g.user["name"]
+        }
     else:
         message = gettext("You are not logged in.")
     return render_template("5-index.html", message=message)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
