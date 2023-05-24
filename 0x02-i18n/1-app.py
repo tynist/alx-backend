@@ -10,8 +10,10 @@ app = Flask(__name__)
 babel = Babel(app)
 
 
-# Config class for Flask app
 class Config:
+    """
+    Configuration class for Flask app.
+    """
     # Available languages
     LANGUAGES = ["en", "fr"]
 
