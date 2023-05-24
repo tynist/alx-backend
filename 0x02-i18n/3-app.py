@@ -14,7 +14,8 @@ babel = Babel(app)
 # Config class for Flask app
 class Config:
     """
-    Configuration class for the Flask app.
+    Configuration class for Flask app,
+    Set Babel’s default locale ("en") and timezone ("UTC")
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = 'en'
@@ -26,7 +27,10 @@ app.config.from_object(Config)
 
 @babel.localeselector
 def get_locale():
-    # Determine the best match with the supported languages
+    """
+    Locale selector function for Babel.
+    Determines the best-matching language based on the user's preferences.
+    """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
