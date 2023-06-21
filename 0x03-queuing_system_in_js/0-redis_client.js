@@ -1,7 +1,7 @@
-import Redis from 'redis';
+import redis from 'redis';
 
 // Create a Redis client
-const redisClient = Redis.createClient();
+const redisClient = redis.createClient();
 
 // Handle Redis client connection events
 redisClient.on('connect', () => {
